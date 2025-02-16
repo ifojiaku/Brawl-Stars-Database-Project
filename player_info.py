@@ -5,7 +5,7 @@ def main():
     try:
         client = BrawlStarsClient()
         # Enter player tag from brawl stars (should be on profile page)
-        player_tag = "#PL2RJGRCY"
+        player_tag = "#82YPUUL8"
         player_data = client.get_player(player_tag)
 
         # example player tags

@@ -30,3 +30,16 @@ class BrawlStarsClient:
         except Exception as e:
             print(f"Error: {e}")
         return None
+
+    def get_battle_log(self, player_tag):
+        url = f"{self.base_url}/players/%23{player_tag[1:]}/battlelog"
+        try:
+            response = requests.get(url, headers=self.headers)
+            if response.status_code == 200:
+                return response.json()
+            else:
+                print(f"Error: {response.status_code}")
+                print(response.text)
+        except Exception as e:
+            print(f"Error: {e}")
+        return None
