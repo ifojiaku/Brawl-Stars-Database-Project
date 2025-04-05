@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { fetchAllPlayers,fetchPlayerSpecific,fetchPlayer_wins } from './supabase/sb_playerInfo'
+import { fetchAllPlayers,fetchBrawlerPlayers,fetchPlayer_wins,fetchSPlayerTBs,fetchSPlayerBLG,fetch_playerInfo } from './supabase/sb_playerInfo'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,19 +17,42 @@ function App() {
   };
 
   const handleFetchSpecific = async () => {
-    const result = await fetchPlayerSpecific(16000000); //hard coded for shelly rn
+    const result = await fetchBrawlerPlayers(16000000); //hard coded for shelly rn
     if (result){
       setData(result);
       // console.log(result);
     }
   };
   const handleSinPlayerWins = async () =>{
-    const result = await fetchPlayer_wins('#L2CQPQ2U8'); //hard coded for one player rn
+    const result = await fetchPlayer_wins('01'); //hard coded for one player rn
     if (result){
       setData(result);
       console.log(result);
     }
   };
+  const handle_SPlayerTopBS = async () =>{
+    // const result = await fetch fetchSPlayerTBs
+    const result = await fetchSPlayerTBs('01'); //hard coded for one player rn
+    if (result){
+      setData(result);
+      // console.log(result);
+    }
+  }
+  const handle_SPlyBtlLog = async () =>{
+    const result = await fetchSPlayerBLG('01'); //hard coded for one player rn
+    if (result){
+      setData(result);
+      // console.log(result);
+    }
+  }
+  const handle_SPlyInfo = async () =>{
+    const result = await fetch_playerInfo('01'); //hard coded for one player rn
+    if (result){
+      setData(result);
+      // console.log(result);
+    }
+  }
+
 
   return (
     <>
@@ -52,9 +75,11 @@ function App() {
       <button onClick={handleFetchSpecific}> Fetch Specific</button>
       <button onClick={handleSinPlayerWins}> Fetch Player's Different Game wins</button>
       <button onClick={handle_SPlayerTopBS}>Fetch Player's top Brawlers</button>
+      <button onClick={handle_SPlyBtlLog}>Fetch Player's Battle log</button>
+      <button onClick={handle_SPlyInfo}>Fetch Player's Info</button>
       <ul>
         {data.map((item, index) => (
-          <li key={index}>{JSON.stringify(item)}</li> // Show full data structure
+          <li key={index}>{JSON.stringify(item)}</li> 
         ))}
       </ul>
       

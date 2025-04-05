@@ -18,8 +18,8 @@ export const fetchAllPlayers = async () => {
     return data;
   };
 
-  // Gets top X
-  // Returns Json
+  // Gets top players per brawlerID!! put in
+  // orders it by trophies and not winrate, can change this
 export const fetchBrawlerPlayers = async (brawler, limit=10) =>{
   const {data, error} = await supabase_connection.rpc('get_top_players_per_brawler',{brawler:brawler,num:limit});
 
@@ -36,7 +36,7 @@ export const fetchBrawlerPlayers = async (brawler, limit=10) =>{
 
 // Fetching all wins from a specific player
 // in the three diff modes: 3v3, solo, victories
-// returning 3 nums
+// Is not working for me yet
 export const fetchPlayer_wins = async (playerTag) =>{
   const {data,error} = supabase_connection.from("player_victories").select('solo_victories','duo_victories','3v3_victories').eq('tag',playerTag);
 
@@ -49,17 +49,43 @@ export const fetchPlayer_wins = async (playerTag) =>{
 
 }
 
+// Fetching players most played/top brawlers (limited defaultly 10) <----
+// returns (brawler id,brawler name, total battles, winrate)
+export const fetchSPlayerTBs = async (tag, limit=10) =>{
+  const {data, error} = await supabase_connection.rpc('get_splayertopbrawlers',{player_tag:tag,num:limit});
 
-// Fetching a player's most played brawler (1 return)
-// or instead
-// Fetching players most played brawlers (limited defaultly 10)
+  if(error){
+    console.error("Error using function'get_splayertopbrawlers'", error);
+    return null
+  }
+  // console.log(data);
+  return data;
+};
 
 
-// Fetching a player's played brawlers(at least one entry in brawlers_player) along with their winrates
 
+// Fetching a player's recent battle log (pulling from battles_player and battles (for the timestamp) and brawler for name )
+// returns bp.brawler_id, b.name, bp.trophy_change, bp.result, bt.mode, bt.date
+// organized by timestamp/date (most recent first)
+export const fetchSPlayerBLG = async (tag, limit=10) =>{
+  const {data, error} = await supabase_connection.rpc('get_spbatlog',{player_tag:tag,num:limit});
 
-// Fetching a player's recent battle log (pulling from battles_player and battles (for the timestamp) )
-// organized by timestamp 
+  if(error){
+    console.error("Error using function'get_spbatlog'", error);
+    return null
+  }
+  // console.log(data);
+  return data;
+};
 
+export const fetch_playerInfo = async(tag) =>{
+  const {data, error} = await supabase_connection.rpc('get_splyinfo',{player_tag:tag});
+
+  if(error){
+    console.error("Error using function'get_splyinfo'", error);
+    return null
+  }
+  return data;
+};
 
 
