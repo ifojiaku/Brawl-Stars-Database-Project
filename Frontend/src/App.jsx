@@ -3,10 +3,14 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { fetchAllPlayers,fetchBrawlerPlayers,fetchPlayer_wins,fetchSPlayerTBs,fetchSPlayerBLG,fetch_playerInfo } from './supabase/sb_playerInfo'
+import {get_AllBwlrPerformance,get_SBwlrPerformance} from './supabase/sb_brawler'
+import { Link } from 'react-router-dom';
+import BrawlerPage from './components/brawler'
 
 function App() {
   const [count, setCount] = useState(0)
   const [data, setData] = useState([]);
+  const [brawlers,setBrawlers] = useState([]);
 
   const handleFetch = async () => {
     const result = await fetchAllPlayers();
@@ -52,11 +56,27 @@ function App() {
       // console.log(result);
     }
   }
-
+  const handle_AllBrawlerPerf = async () =>{
+    const result = await get_AllBwlrPerformance(); 
+    if (result){
+      setData(result);
+      setBrawlers(result);
+      // console.log(result);
+    }
+  }
+  
+  const handle_SBrawlPerf= async () =>{
+    const result = await get_SBwlrPerformance(16000000); //hard coded for one brawler rn
+    if (result){
+      setData(result);
+      // console.log(result);
+    }
+  }
 
   return (
     <>
-      <div>
+    
+      {/* <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -69,19 +89,55 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-      </div>
+      </div> */}
       <h1>Supabase Test</h1>
+      <h2>Player Info</h2>
       <button onClick={handleFetch}>Fetch Data</button>
-      <button onClick={handleFetchSpecific}> Fetch Specific</button>
+      <button onClick={handleFetchSpecific}> Fetch Top players per brawler</button>
       <button onClick={handleSinPlayerWins}> Fetch Player's Different Game wins</button>
       <button onClick={handle_SPlayerTopBS}>Fetch Player's top Brawlers</button>
       <button onClick={handle_SPlyBtlLog}>Fetch Player's Battle log</button>
       <button onClick={handle_SPlyInfo}>Fetch Player's Info</button>
+      <h2>Brawler info</h2>
+      <button onClick={handle_AllBrawlerPerf}>Get Brawler Performance</button>
+      <button onClick={handle_SBrawlPerf}>Get Single Brawler Mode Performance </button>
+      
+      <h3>Results</h3>
       <ul>
         {data.map((item, index) => (
           <li key={index}>{JSON.stringify(item)}</li> 
         ))}
       </ul>
+
+      <h3>Brawlers</h3>
+      <button onClick={handle_AllBrawlerPerf}>Load Brawlers</button>
+      <div>
+      <h3>Brawlers</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Usage Count</th>
+            <th>Win Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {brawlers.map((item, index) => (
+            <tr key={index}>
+              <td>
+                <Link to={`/brawler/${item.brawler_id}`}>
+                  {item.name}
+                </Link>
+              </td>
+              <td>{item.usage_count}</td>
+              <td>{item.win_rate}%</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+
       
     </>
   )

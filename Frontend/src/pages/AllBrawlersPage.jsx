@@ -1,0 +1,1 @@
+// On this page we will put the brawlers table that has their icons and that will reroute to their individual pages
