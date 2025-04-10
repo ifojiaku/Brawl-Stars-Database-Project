@@ -111,31 +111,7 @@ function App() {
 
       <h3>Brawlers</h3>
       <button onClick={handle_AllBrawlerPerf}>Load Brawlers</button>
-      <div>
-      <h3>Brawlers</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Usage Count</th>
-            <th>Win Rate</th>
-          </tr>
-        </thead>
-        <tbody>
-          {brawlers.map((item, index) => (
-            <tr key={index}>
-              <td>
-                <Link to={`/brawler/${item.brawler_id}`}>
-                  {item.name}
-                </Link>
-              </td>
-              <td>{item.usage_count}</td>
-              <td>{item.win_rate}%</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+      
 
 
       
@@ -143,4 +119,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
