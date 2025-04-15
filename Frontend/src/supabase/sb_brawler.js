@@ -39,3 +39,15 @@ export async function get_SBwlrPerformance(brawlerID) {
     
     return data;
   }
+
+  // get_brawler_items
+  export const fetchBrawlerItems = async (brawler) =>{
+    const {data, error} = await supabase_connection.rpc('get_brawler_items',{brawler_id:brawler});
+  
+    if(error){
+      console.error("Error using function'get_brawler_items'", error);
+      return null
+    }
+    // console.log(data);
+    return data;
+  };
