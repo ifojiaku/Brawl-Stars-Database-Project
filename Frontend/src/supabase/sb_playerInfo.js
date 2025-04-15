@@ -18,6 +18,18 @@ export const fetchAllPlayers = async () => {
     return data;
   };
 
+  // get_top_players_winrate
+// getting top players -> orders by winrate
+export const fetch_topP_winrate = async(tag) =>{
+  const {data, error} = await supabase_connection.rpc('get_top_players_winrate');
+
+  if(error){
+    console.error("Error using function'get_top_players_winrate'", error);
+    return null
+  }
+  return data;
+};
+
   // Gets top players per brawlerID!! put in
   // orders it by trophies and not winrate, can change this
 export const fetchBrawlerPlayers = async (brawler, limit=10) =>{
@@ -87,5 +99,6 @@ export const fetch_playerInfo = async(tag) =>{
   }
   return data;
 };
+
 
 

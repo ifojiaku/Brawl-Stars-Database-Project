@@ -6,6 +6,7 @@ import { fetchAllPlayers,fetchBrawlerPlayers,fetchPlayer_wins,fetchSPlayerTBs,fe
 import {get_AllBwlrPerformance,get_SBwlrPerformance} from './supabase/sb_brawler'
 import { Link } from 'react-router-dom';
 import BrawlerPage from './components/brawler'
+import Header from './components/header'
 
 function App() {
   const [count, setCount] = useState(0)

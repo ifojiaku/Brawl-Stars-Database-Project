@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {get_clubInfo,get_allclubmembers} from '../supabase/sb_club';
+import { Link } from 'react-router-dom';
 
 // import { get_SBwlrPerformance } from '../supabase/sb_brawler';
 // import { fetchBrawlerPlayers } from '../supabase/sb_playerInfo';
@@ -71,13 +72,14 @@ const ClubPage = () => {
           {members.map((item, index) => (
             <tr key={index}>
               <td>
-                {/* <Link to={`/players/${item.tag}`}>
-                  {item.name}
-                </Link> */}
-                {/* change link to link back to the player when player route and page are made */}
-                <img src={`https://cdn.brawlify.com/profile-icons/regular/${item.icon}.png`} width={100} height={100}></img>
-              </td>
-              <td>{item.name}</td>
+                <Link to={`/players/${item.tag}`}>
+                  <img src={`https://cdn.brawlify.com/profile-icons/regular/${item.icon}.png`} width={100} height={100} alt="icon" />
+                  </Link>
+                </td>
+                <td>
+                <Link to={`/players/${item.tag}`}>{item.name}
+                </Link>
+                </td>
               <td>{item.role}</td>
             </tr>
           ))}

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { get_SBwlrPerformance } from '../supabase/sb_brawler';
 import { fetchBrawlerPlayers } from '../supabase/sb_playerInfo';
+import { Link } from 'react-router-dom';
 
 
 const BrawlerPage = ({ initialData }) => {
@@ -58,37 +59,41 @@ const BrawlerPage = ({ initialData }) => {
       </div>
     
       
+      {topPlayers?.length > 0 && (
       <div>
         <h2>Top Players</h2>
         <table>
-        <thead>
-          <tr>
-            <th>Icon</th>
-            <th>Name</th>
-            <th>Brawler Trophies</th>
-            <th>Win Rate</th>
-            <th>Battles Played</th>
-          </tr>
-        </thead>
-        <tbody>
-          {topPlayers.map((item, index) => (
-            <tr key={index}>
-              <td>
-                {/* <Link to={`/players/${item.tag}`}>
-                  {item.name}
-                </Link> */}
-                {/* change link to link back to the player when player route and page are made */}
-                <img src={`https://cdn.brawlify.com/profile-icons/regular/${item.icon}.png`} width={100} height={100}></img>
-              </td>
-              <td>{item.name}</td>
-              <td>{item.brawler_trophies}</td>
-              <td>{item.brawler_win_rate}%</td>
-              <td>{item.battles_played}</td>
+          <thead>
+            <tr>
+              <th>Icon</th>
+              <th>Name</th>
+              <th>Brawler Trophies</th>
+              <th>Win Rate</th>
+              <th>Battles Played</th>
             </tr>
-          ))}
-        </tbody>
+          </thead>
+          <tbody>
+            {topPlayers.map((item, index) => (
+              <tr key={index}>
+                <td>
+                <Link to={`/players/${item.tag}`}>
+                  <img src={`https://cdn.brawlify.com/profile-icons/regular/${item.icon}.png`} width={100} height={100} alt="icon" />
+                  </Link>
+                </td>
+                <Link to={`/players/${item.tag}`}>
+                <td>{item.name}</td>
+              </Link>
+                
+                <td>{item.brawler_trophies}</td>
+                <td>{item.brawler_win_rate}%</td>
+                <td>{item.battles_played}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
+    )}
+
     </div>
   );
 };
