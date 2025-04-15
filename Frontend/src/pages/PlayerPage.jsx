@@ -4,8 +4,7 @@ import {
   fetch_playerInfo,
   fetchPlayer_wins,
   fetchSPlayerTBs,
-  fetchSPlayerBLG,
-  // fetch_topP_winrate, // optional
+  fetchSPlayerBLG
 } from '../supabase/sb_playerInfo';
 import { Link } from 'react-router-dom';
 
@@ -22,7 +21,7 @@ const PlayerPage = () => {
       setPlayerInfo(info);
 
       const wins = await fetchPlayer_wins(playerTag);
-      setPlayerWins(wins?.[0]); // Assuming result is an array
+      setPlayerWins(wins?.[0]); 
 
       const brawlers = await fetchSPlayerTBs(playerTag, 5);
       setTopBrawlers(brawlers);

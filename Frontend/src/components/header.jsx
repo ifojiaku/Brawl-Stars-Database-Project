@@ -9,6 +9,7 @@ const Header = () => {
         <Link to="/clubs" style={styles.link}>Top Clubs</Link>
         <Link to="/players" style={styles.link}>Players</Link>
         {/* <Link to="/items" style={styles.link}>Items</Link> */}
+        {/* might not do an items list but could eventaully. will just use items as shown in brawler */}
       </nav>
     </header>
   );
