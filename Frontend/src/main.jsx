@@ -10,6 +10,7 @@ import AllClubsPage from './pages/AllClubsPage.jsx';
 import TopPlayersPage from './pages/TopPlayersPage.jsx';
 import PlayerPage from './pages/PlayerPage.jsx';
 import Header from './components/header'
+import SearchPage from './pages/searchPage.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -23,6 +24,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/clubs" element={<AllClubsPage/>}/>
         <Route path="/players" element={<TopPlayersPage/>}/> 
         <Route path="/players/:playerTag" element={<PlayerPage />} />
+        <Route path="/search" element={<SearchPage/>}/>
       </Routes>
     </Router>
   </StrictMode>,
