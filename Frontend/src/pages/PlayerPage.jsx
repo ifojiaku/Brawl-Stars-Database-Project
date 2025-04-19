@@ -8,8 +8,11 @@ import {
 } from '../supabase/sb_playerInfo';
 import { Link } from 'react-router-dom';
 
+
 const PlayerPage = () => {
-  const { playerTag } = useParams();
+  const { playerTag: encodedTag } = useParams();
+  const playerTag = decodeURIComponent(encodedTag); // Decode the URL-encoded tag since im having issues with url with a hashtag.
+  
   const [playerInfo, setPlayerInfo] = useState(null);
   const [playerWins, setPlayerWins] = useState(null);
   const [topBrawlers, setTopBrawlers] = useState([]);
@@ -48,12 +51,12 @@ const PlayerPage = () => {
       <p>Trophies: {playerInfo[0]?.trophies}</p>
       <p>Highest Trophies: {playerInfo[0]?.highest_trophies}</p>
 
-      {playerWins && (
+      {playerInfo && (
         <div>
           <h2>Victories</h2>
-          <p>Solo: {playerWins.solo_victories}</p>
-          <p>Duo: {playerWins.duo_victories}</p>
-          <p>3v3: {playerWins['3v3_victories']}</p>
+          <p>Solo: {playerInfo[0]?.solo_victories}</p>
+          <p>Duo: {playerInfo[0]?.duo_victories}</p>
+          <p>3v3: {playerInfo[0]?.['3v3_victories']}</p>
         </div>
       )}
 
@@ -104,7 +107,7 @@ const PlayerPage = () => {
           <tbody>
             {battleLog.map((battle, i) => (
               <tr key={i}>
-                <td>{battle.brawler_name}</td>
+                <td>{battle.name}</td>
                 <td>{battle.result}</td>
                 <td>{battle.trophy_change}</td>
                 <td>{battle.mode}</td>

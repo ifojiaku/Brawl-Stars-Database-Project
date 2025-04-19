@@ -93,12 +93,12 @@ const BrawlerPage = ({ initialData }) => {
               {topPlayers.map((item, index) => (
                 <tr key={index}>
                   <td>
-                    <Link to={`/players/${item.tag}`}>
+                  <Link to={`/players/${encodeURIComponent(item.tag)}`}>
                       <img src={`https://cdn.brawlify.com/profile-icons/regular/${item.icon}.png`} width={100} height={100} alt="icon" />
                     </Link>
                   </td>
                   <td>
-                    <Link to={`/players/${item.tag}`}>{item.name}</Link>
+                  <Link to={`/players/${encodeURIComponent(item.tag)}`}>{item.name}</Link>
                   </td>
                   <td>{item.brawler_trophies}</td>
                   <td>{item.brawler_win_rate}%</td>

@@ -12,14 +12,15 @@ const ClubPage = () => {
   const [extraData, setExtraData] = useState();
   const [members, setMembers] = useState([]);
 
-  const { clubTag } = useParams();
+  const { clubTag: encodedTag} = useParams();
+    const clubTag = decodeURIComponent(encodedTag); // Decode the URL-encoded tag since im having issues with url with a hashtag.
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         
-        const result = await get_clubInfo(parseInt(clubTag));
+        const result = await get_clubInfo((clubTag));
         setExtraData(result);
         console.log(result);
       } catch (err) {
@@ -29,7 +30,7 @@ const ClubPage = () => {
   
     const fetchclubMembers = async () => {
       try {
-        const result = await get_allclubmembers(parseInt(clubTag));
+        const result = await get_allclubmembers((clubTag));
         setMembers(result);
         console.log(result);
       } catch (err) {
@@ -64,6 +65,7 @@ const ClubPage = () => {
         <thead>
           <tr>
             <th></th>
+            <th></th>
             <th>Name</th>
             <th>Role</th>
           </tr>
@@ -72,12 +74,13 @@ const ClubPage = () => {
           {members.map((item, index) => (
             <tr key={index}>
               <td>
-                <Link to={`/players/${item.tag}`}>
+              <Link to={`/players/${encodeURIComponent(item.player_tag)}`}>
                   <img src={`https://cdn.brawlify.com/profile-icons/regular/${item.icon}.png`} width={100} height={100} alt="icon" />
                   </Link>
                 </td>
+                
                 <td>
-                <Link to={`/players/${item.tag}`}>{item.name}
+                <Link to={`/players/${(item.player_tag)}`}>{item.name}
                 </Link>
                 </td>
               <td>{item.role}</td>

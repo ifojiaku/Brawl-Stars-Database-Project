@@ -45,10 +45,12 @@ const AllClubsPage = () =>{
                 {clubs.map((item, index) => (
                     <tr key={index}>
                     <td>
+                    <Link to={`/clubs/${encodeURIComponent(item.club_tag)}`}>
                     <img src={`https://cdn.brawlify.com/club-badges/regular/${item.badgeNum}.png`} width={100} height={100} alt="Club Badge" />
+                    </Link>
                     </td>
                     <td>
-                        <Link to={`/clubs/${item.club_tag}`}> 
+                        <Link to={`/clubs/${encodeURIComponent(item.club_tag)}`}>
                         {item.name}
                         </Link>
                     </td>

@@ -45,12 +45,12 @@ const TopPlayersPage = () =>{
                 {players.map((item, index) => (
                     <tr key={index}>
                     <td>
-                        <Link to={`/players/${item.tag}`}>
+                    <Link to={`/players/${encodeURIComponent(item.tag)}`}>
                     <img src={`https://cdn.brawlify.com/profile-icons/regular/${item.icon}.png`} width={100} height={100} alt="Player Icon" />
                     </Link>
                     </td>
                     <td>
-                        <Link to={`/players/${item.tag}`}>{item.name}</Link>
+                    <Link to={`/players/${encodeURIComponent(item.tag)}`}>{item.name}</Link>
                     </td>
                     <td>{item.trophies}</td>
                     <td>{item.win_rate}</td>

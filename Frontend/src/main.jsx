@@ -12,6 +12,18 @@ import PlayerPage from './pages/PlayerPage.jsx';
 import Header from './components/header'
 import SearchPage from './pages/searchPage.jsx';
 
+// When generating links/navigation:
+// const encodedTag = encodeURIComponent(playerTag); // converts # to %23
+// <Link to={`/player/${encodedTag}`}>View Player</Link>
+
+// // In your router:
+// <Route path="/player/:tag" component={PlayerProfile} />
+
+// // In your component:
+// const PlayerProfile = ({ match }) => {
+//   const playerTag = decodeURIComponent(match.params.tag); // converts %23 back to #
+//   // use playerTag to fetch data
+// }
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
