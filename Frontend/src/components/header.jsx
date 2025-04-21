@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SupabaseTest from '../pages/SupabaseTest.jsx';
 
 const Header = () => {
   return (
@@ -12,6 +13,7 @@ const Header = () => {
         <Link to="/clubs" style={styles.link}>Top Clubs</Link>
         <Link to="/players" style={styles.link}>Top Players</Link>
         <Link to="/balance" style={styles.link}>Balance</Link>
+        <Link to="/supabasetest" style={styles.link}>DB Test</Link>
         {/* <Link to="/items" style={styles.link}>Items</Link> */}
         {/* might not do an items list but could eventaully. will just use items as shown in brawler */}
       </nav>
