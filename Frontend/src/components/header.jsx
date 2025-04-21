@@ -11,6 +11,7 @@ const Header = () => {
         <Link to="/brawler" style={styles.link}>Brawlers</Link>
         <Link to="/clubs" style={styles.link}>Top Clubs</Link>
         <Link to="/players" style={styles.link}>Top Players</Link>
+        <Link to="/balance" style={styles.link}>Balance</Link>
         {/* <Link to="/items" style={styles.link}>Items</Link> */}
         {/* might not do an items list but could eventaully. will just use items as shown in brawler */}
       </nav>

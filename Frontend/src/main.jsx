@@ -11,19 +11,10 @@ import TopPlayersPage from './pages/TopPlayersPage.jsx';
 import PlayerPage from './pages/PlayerPage.jsx';
 import Header from './components/header'
 import SearchPage from './pages/searchPage.jsx';
+import AdminPage from './pages/adminPage.jsx';
+import BrawlerBalancePage from './pages/brawlerBalance.jsx';
 
-// When generating links/navigation:
-// const encodedTag = encodeURIComponent(playerTag); // converts # to %23
-// <Link to={`/player/${encodedTag}`}>View Player</Link>
 
-// // In your router:
-// <Route path="/player/:tag" component={PlayerProfile} />
-
-// // In your component:
-// const PlayerProfile = ({ match }) => {
-//   const playerTag = decodeURIComponent(match.params.tag); // converts %23 back to #
-//   // use playerTag to fetch data
-// }
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
@@ -37,6 +28,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/players" element={<TopPlayersPage/>}/> 
         <Route path="/players/:playerTag" element={<PlayerPage />} />
         <Route path="/search" element={<SearchPage/>}/>
+        <Route path="/admin" element={<AdminPage/>}/>
+        <Route path="/balance" element={<BrawlerBalancePage/>}/>
       </Routes>
     </Router>
   </StrictMode>,
