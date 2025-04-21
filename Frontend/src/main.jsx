@@ -12,6 +12,8 @@ import PlayerPage from './pages/PlayerPage.jsx';
 import Header from './components/header'
 import SearchPage from './pages/searchPage.jsx';
 import SupabaseTest from './pages/SupabaseTest.jsx';
+import AdminPage from './pages/adminPage.jsx';
+import BrawlerBalancePage from './pages/brawlerBalance.jsx';
 
 // When generating links/navigation:
 // const encodedTag = encodeURIComponent(playerTag); // converts # to %23
