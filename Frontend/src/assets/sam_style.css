@@ -1,0 +1,137 @@
+/* dark-mode.css */
+/* sam */
+
+.dark-container {
+    margin: 0 auto;
+    padding: 2rem;
+    max-width: 1200px;
+    color: #e5e7eb; /* light gray text */
+    background-color: #1f2937; /* dark slate background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  
+  h1, h2, h3 {
+    color: #f9fafb; /* almost-white */
+    margin-bottom: 1rem;
+  }
+  
+  
+  table.dark-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: #374151; 
+  }
+  table.dark-table th,
+  table.dark-table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid #4b5563;
+  }
+  table.dark-table thead th {
+    background-color: #4b5563;
+    color: #f9fafb;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+  }
+  table.dark-table tbody tr:nth-child(even) {
+    background-color: #1f2937;
+  }
+  table.dark-table tbody tr:nth-child(odd) {
+    background-color: #374151;
+  }
+  table.dark-table a {
+    color: #60a5fa; /* sky-400 */
+    text-decoration: none;
+  }
+  table.dark-table a:hover {
+    text-decoration: underline;
+  }
+  
+  
+  .player-card {
+    display: flex;
+    align-items: center;
+    background-color: #374151;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+  }
+  .player-card img {
+    margin-right: 1rem;
+  }
+  .player-card div {
+    color: #f9fafb;
+  }
+  
+  
+  a.dark-link {
+    color: #60a5fa;
+  }
+  a.dark-link:hover {
+    color: #93c5fd;
+  }
+  .button-dark {
+    background-color: #2563eb;
+    color: #f9fafb;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .button-dark:hover {
+    background-color: #1e40af;
+  }
+  
+  
+  .section {
+    margin-top: 2rem;
+  }
+  .section h2 {
+    border-bottom: 2px solid #4b5563;
+    padding-bottom: 0.5rem;
+  }
+  
+  
+  td img.dark-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  
+.mode-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .mode-item {
+    background-color: #4b5563;
+    padding: 1rem;
+    border-radius: 8px;
+    flex: 1 1 calc(33% - 1rem);
+    min-width: 200px;
+    color: #f9fafb;
+    font-weight: 500;
+  }
+  
+  
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .item-card {
+    background-color: #4b5563;
+    padding: 1rem;
+    border-radius: 8px;
+    color: #e5e7eb;
+  }

@@ -7,12 +7,12 @@ import {
   fetchSPlayerBLG
 } from '../supabase/sb_playerInfo';
 import { Link } from 'react-router-dom';
+import "../assets/sam_style.css";
 
 
 const PlayerPage = () => {
   const { playerTag: encodedTag } = useParams();
-  const playerTag = decodeURIComponent(encodedTag); // Decode the URL-encoded tag since im having issues with url with a hashtag.
-  
+  const playerTag = decodeURIComponent(encodedTag);
   const [playerInfo, setPlayerInfo] = useState(null);
   const [playerWins, setPlayerWins] = useState(null);
   const [topBrawlers, setTopBrawlers] = useState([]);
@@ -22,101 +22,106 @@ const PlayerPage = () => {
     const fetchData = async () => {
       const info = await fetch_playerInfo(playerTag);
       setPlayerInfo(info);
-
       const wins = await fetchPlayer_wins(playerTag);
-      setPlayerWins(wins?.[0]); 
-
+      setPlayerWins(wins?.[0]);
       const brawlers = await fetchSPlayerTBs(playerTag, 5);
       setTopBrawlers(brawlers);
-
       const battles = await fetchSPlayerBLG(playerTag, 5);
       setBattleLog(battles);
     };
-
     fetchData();
   }, [playerTag]);
 
-  if (!playerInfo) return <div>Loading player data...</div>;
+  if (!playerInfo) return <div className="dark-container">Loading player data...</div>;
 
+  const p = playerInfo[0];
   return (
-    <div>
-      <h1>{playerInfo[0]?.name}</h1>
-      <img
-        src={`https://cdn.brawlify.com/profile-icons/regular/${playerInfo[0]?.icon}.png`}
-        width={100}
-        height={100}
-        alt="Profile Icon"
-      />
-      <p>Tag: {playerInfo[0]?.tag}</p>
-      <p>Trophies: {playerInfo[0]?.trophies}</p>
-      <p>Highest Trophies: {playerInfo[0]?.highest_trophies}</p>
-
-      {playerInfo && (
+    <div className="dark-container">
+      <div className="player-card">
+        <img
+          src={`https://cdn.brawlify.com/profile-icons/regular/${p.icon}.png`}
+          width={100}
+          height={100}
+          alt="Profile Icon"
+        />
         <div>
-          <h2>Victories</h2>
-          <p>Solo: {playerInfo[0]?.solo_victories}</p>
-          <p>Duo: {playerInfo[0]?.duo_victories}</p>
-          <p>3v3: {playerInfo[0]?.['3v3_victories']}</p>
+          <h1>{p.name}</h1>
+          <p>Tag: {p.tag}</p>
+          <p>Trophies: {p.trophies}</p>
+          <p>Highest: {p.highest_trophies}</p>
         </div>
-      )}
+      </div>
 
-      <div>
+      <section className="section">
+        <h2>Victories</h2>
+        <p>Solo: {p.solo_victories}</p>
+        <p>Duo: {p.duo_victories}</p>
+        <p>3v3: {p['3v3_victories']}</p>
+      </section>
+
+      <section className="section">
         <h2>Top Brawlers</h2>
-        <table>
+        <table className="dark-table">
           <thead>
             <tr>
-                <th></th>
+              <th></th>
               <th>Brawler</th>
               <th>Total Battles</th>
               <th>Win Rate (%)</th>
             </tr>
           </thead>
           <tbody>
-            {topBrawlers.map((brawler, i) => (
+            {topBrawlers.map((b, i) => (
               <tr key={i}>
                 <td>
-                    <Link to={`/brawler/${brawler.brawler_id}`}>
-                        <img src={`https://cdn.brawlify.com/brawlers/borders/${brawler.brawler_id}.png`} width={50} height={50} alt="BrawlerIcon" />
-                    </Link>
-                    </td>
-                    <td>
-                        <Link to={`/brawler/${brawler.brawler_id}`}>
-                        {brawler.brawler_name}
-                        </Link>
-                    </td>
-                <td>{brawler.total_battles}</td>
-                <td>{brawler.win_rate.toFixed(2)}</td>
+                  <Link to={`/brawler/${b.brawler_id}`} className="dark-link">
+                    <img
+                      src={`https://cdn.brawlify.com/brawlers/borders/${b.brawler_id}.png`}
+                      width={50}
+                      height={50}
+                      alt="Icon"
+                      className="dark-icon"
+                    />
+                  </Link>
+                </td>
+                <td>
+                  <Link to={`/brawler/${b.brawler_id}`} className="dark-link">
+                    {b.brawler_name}
+                  </Link>
+                </td>
+                <td>{b.total_battles}</td>
+                <td>{b.win_rate.toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      </section>
 
-      <div>
+      <section className="section">
         <h2>Recent Battles</h2>
-        <table>
+        <table className="dark-table">
           <thead>
             <tr>
               <th>Brawler</th>
               <th>Result</th>
-              <th>Trophy Change</th>
+              <th>Trophy Δ</th>
               <th>Mode</th>
               <th>Date</th>
             </tr>
           </thead>
           <tbody>
-            {battleLog.map((battle, i) => (
+            {battleLog.map((b, i) => (
               <tr key={i}>
-                <td>{battle.name}</td>
-                <td>{battle.result}</td>
-                <td>{battle.trophy_change}</td>
-                <td>{battle.mode}</td>
-                <td>{new Date(battle.date).toLocaleString()}</td>
+                <td>{b.name}</td>
+                <td>{b.result}</td>
+                <td>{b.trophy_change}</td>
+                <td>{b.mode}</td>
+                <td>{new Date(b.date).toLocaleString()}</td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      </section>
     </div>
   );
 };
