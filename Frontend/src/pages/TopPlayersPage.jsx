@@ -3,66 +3,77 @@ import React, { useEffect, useState } from 'react';
 // import { get_AllBwlrPerformance } from '../supabase/sb_brawler';
 import { Link } from 'react-router-dom';
 import { fetch_topP_winrate } from '../supabase/sb_playerInfo';
+import '../assets/sam_style.css';
 
 
 // Changes to db
 // Add badgeNum ( ex. "badgeId": 8000023)
 // fetch_topP_winrate
-const TopPlayersPage = () =>{
-    const [players,setPlayers] = useState([]);
-    
+const TopPlayersPage = () => {
+    const [players, setPlayers] = useState([]);
+  
     useEffect(() => {
-        const fetch_TopPlayers = async () =>{
-        try{
-            const result = await fetch_topP_winrate(); 
-            if (result){
-              setPlayers(result);
-              console.log(result);
-            }
-          } catch(err){
-            console.error('Error fetching data:', err);
+      async function fetchTopPlayers() {
+        try {
+          const result = await fetch_topP_winrate();
+          if (result) setPlayers(result);
+        } catch (err) {
+          console.error('Error fetching top players:', err);
         }
-        
-    };
-    fetch_TopPlayers();
-    },[]);
-    return(
-        <>
-        <div>
-            <h1>Top Players</h1>
-            <table>
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Required Trophies</th>
-                    <th>Total Trophies</th>
-                    {/* <th># of Members</th> */}
-                </tr>
-                </thead>
-                <tbody>
-                {players.map((item, index) => (
-                    <tr key={index}>
-                    <td>
-                    <Link to={`/players/${encodeURIComponent(item.tag)}`}>
-                    <img src={`https://cdn.brawlify.com/profile-icons/regular/${item.icon}.png`} width={100} height={100} alt="Player Icon" />
+      }
+      fetchTopPlayers();
+    }, []);
+  
+    return (
+      <div className="dark-container">
+        <section className="section">
+          <h1>Top Players</h1>
+          <table className="dark-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Trophies</th>
+                <th>Win Rate</th>
+                <th>Battles Played</th>
+              </tr>
+            </thead>
+            <tbody>
+              {players.map((p, idx) => (
+                <tr key={idx}>
+                  <td>
+                    <Link to={`/players/${encodeURIComponent(p.tag)}`} className="dark-link">
+                      <img
+                        src={`https://cdn.brawlify.com/profile-icons/regular/${p.icon}.png`}
+                        width={48}
+                        height={48}
+                        alt="Player Icon"
+                        className="dark-icon"
+                      />
                     </Link>
-                    </td>
-                    <td>
-                    <Link to={`/players/${encodeURIComponent(item.tag)}`}>{item.name}</Link>
-                    </td>
-                    <td>{item.trophies}</td>
-                    <td>{item.win_rate}</td>
-                    <td>{item.battles_played}</td>
-                    {/* <td>{item.member_count}</td> */}
-                    </tr>
-                ))}
-                </tbody>
-            </table>
-    </div>
-        </>
+                  </td>
+                  <td>
+                    <Link to={`/players/${encodeURIComponent(p.tag)}`} className="dark-link">
+                      {p.name}
+                    </Link>
+                  </td>
+                  <td>{p.trophies}</td>
+                  <td>{p.win_rate}%</td>
+                  <td>{p.battles_played}</td>
+                </tr>
+              ))}
+              {players.length === 0 && (
+                <tr>
+                  <td colSpan={5} style={{ textAlign: 'center', padding: '1rem', color: '#9ca3af' }}>
+                    No players found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </section>
+      </div>
     );
-};
-
-export default TopPlayersPage;
+  };
+  
+  export default TopPlayersPage;

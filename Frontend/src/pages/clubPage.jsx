@@ -39,6 +39,7 @@ const ClubPage = () => {
         />
         <div>
           <h1>Club: {info.name}</h1>
+          <p>Tag: {clubTag}</p>
           <p>{info.description}</p>
           <p>Type: {info.type}</p>
           <p>Required Trophies: {info.required_trophies}</p>

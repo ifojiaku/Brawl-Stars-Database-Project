@@ -11,7 +11,7 @@ const SearchPage = () => {
     e.preventDefault();
     setError('');
 
-    const tag = input.trim().toUpperCase().replace(/^#/, '');
+    const tag = input.trim();
 
     if (!tag) {
       setError('Please enter a valid tag');
@@ -28,19 +28,20 @@ const SearchPage = () => {
         .single();
 
       if (player) {
-        navigate(`/players/${tag}`);
+        navigate(`/players/${encodeURIComponent(tag)}`);
         return;
       }
+      // to={`/players/${encodeURIComponent(p.tag)}`}
 
       // Check if it's in club table
       const { data: club, error: clubErr } = await supabase_connection
         .from('club')
-        .select('tag')
-        .eq('tag', tag)
+        .select('club_tag')
+        .eq('club_tag', tag)
         .single();
 
       if (club) {
-        navigate(`/clubs/${tag}`);
+        navigate(`/clubs/${encodeURIComponent(tag)}`);
         return;
       }
 
