@@ -11,6 +11,7 @@ import TopPlayersPage from './pages/TopPlayersPage.jsx';
 import PlayerPage from './pages/PlayerPage.jsx';
 import Header from './components/header'
 import SearchPage from './pages/searchPage.jsx';
+import SupabaseTest from './pages/SupabaseTest.jsx';
 
 // When generating links/navigation:
 // const encodedTag = encodeURIComponent(playerTag); // converts # to %23
@@ -37,6 +38,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/players" element={<TopPlayersPage/>}/> 
         <Route path="/players/:playerTag" element={<PlayerPage />} />
         <Route path="/search" element={<SearchPage/>}/>
+        <Route path="/supabasetest" element={<SupabaseTest/>}/>
       </Routes>
     </Router>
   </StrictMode>,
